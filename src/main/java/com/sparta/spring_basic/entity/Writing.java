@@ -1,6 +1,7 @@
 package com.sparta.spring_basic.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sparta.spring_basic.dto.WritingRequestDto;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,4 +25,18 @@ public class Writing extends Timestamped{
     @JsonIgnore // 응답에 해당 데이터 포함하지 않음
     private int password;       // 비밀번호
 
+
+    public Writing(WritingRequestDto requestDto){
+        this.title = requestDto.getTitle();
+        this.content = requestDto.getContent();
+        this.author = requestDto.getAuthor();
+        this.password = requestDto.getPassword();
+    }
+
+    public void update(WritingRequestDto requestDto){
+        this.title = requestDto.getTitle();
+        this.content = requestDto.getContent();
+        this.author = requestDto.getAuthor();
+        this.password = requestDto.getPassword();
+    }
 }
