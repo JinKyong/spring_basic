@@ -1,6 +1,7 @@
 package com.sparta.spring_basic;
 
 import com.sparta.spring_basic.repository.WritingRepository;
+import com.sparta.spring_basic.service.WritingService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

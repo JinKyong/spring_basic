@@ -11,5 +11,5 @@ public class WritingRequestDto {
     private String title;
     private String content;
     private String author;
-    private int password;
+    private String password;
 }

@@ -4,15 +4,16 @@ import com.sparta.spring_basic.dto.WritingRequestDto;
 import com.sparta.spring_basic.entity.Writing;
 import com.sparta.spring_basic.repository.WritingRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.net.PasswordAuthentication;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class WritingService {
-
     private final WritingRepository writingRepository;
 
     //게시글 작성
@@ -23,7 +24,7 @@ public class WritingService {
 
     //전체 게시글 조회
     public List<Writing> getAllPosts() {
-        return writingRepository.findAllByOrderByIdAtDesc();
+        return writingRepository.findAll(Sort.by(Sort.Direction.DESC, "createdAt"));
     }
 
     //id로 게시글 조회
@@ -31,6 +32,13 @@ public class WritingService {
         return writingRepository.findById(id).orElseThrow(
                 () -> new IllegalArgumentException("아이디가 존재하지 않습니다.")
         );
+    }
+
+    public boolean checkPW(Long id, String password) {
+        Writing writing = writingRepository.findById(id).orElseThrow(
+                () -> new IllegalArgumentException("아이디가 존재하지 않습니다.")
+        );
+        return writing.getPassword().equals(password);
     }
 
     //게시글 수정

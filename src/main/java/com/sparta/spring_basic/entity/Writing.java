@@ -23,7 +23,7 @@ public class Writing extends Timestamped{
     private String author;      // 작성자
     @Column(nullable = false)
     @JsonIgnore // 응답에 해당 데이터 포함하지 않음
-    private int password;       // 비밀번호
+    private String password;       // 비밀번호
 
 
     public Writing(WritingRequestDto requestDto){

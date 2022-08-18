@@ -2,17 +2,15 @@ package com.sparta.spring_basic.controller;
 
 import com.sparta.spring_basic.dto.WritingRequestDto;
 import com.sparta.spring_basic.entity.Writing;
-import com.sparta.spring_basic.repository.WritingRepository;
 import com.sparta.spring_basic.service.WritingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequiredArgsConstructor
 @RestController
+@RequiredArgsConstructor
 public class WritingController {
-
     private final WritingService writingService;
 
     @PostMapping("/writing")
@@ -38,5 +36,10 @@ public class WritingController {
     @DeleteMapping("/writing/{id}")
     public Long deletePost(@PathVariable Long id){
         return writingService.deletePost(id);
+    }
+
+    @PostMapping("/writing/check/{id}")
+    public boolean checkPW(@PathVariable Long id, @RequestBody String password){
+        return writingService.checkPW(id, password);
     }
 }
