@@ -1,0 +1,27 @@
+package com.sparta.spring_basic.entity;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED) // 기본 생성자 생성, 접근 권한 protected 지정
+@Entity // DB 테이블 역할
+public class Writing extends Timestamped{
+    @Id // primary key
+    @GeneratedValue(strategy = GenerationType.AUTO) // 자동 증가 명령입니다.
+    private Long id;
+    @Column(nullable = false)   // 컬럼 값이고 반드시 값이 존재해야 함을 나타냅니다.
+    private String title;       // 제목
+    @Column(nullable = false)
+    private String content;     // 내용
+    @Column(nullable = false)
+    private String author;      // 작성자
+    @Column(nullable = false)
+    @JsonIgnore // 응답에 해당 데이터 포함하지 않음
+    private int password;       // 비밀번호
+
+}
