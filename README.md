@@ -67,15 +67,26 @@ API 명세서
 -----------------
 1. 수정, 삭제 API의 request를 어떤 방식으로 사용하셨나요? (param, query, body)
 
+    > 수정에는 param과 body, 삭제에는 param을 사용하였다.
 
 2. 어떤 상황에 어떤 방식의 request를 써야하나요?
 
+    > request를 식별해야하는 상황에서는 Path Variable(param)
+    > 정렬이나 필터링을 해야하는 상황에서는 Query (query)가 더 적합하다.
+    
+    > body같은 경우에는 인수에 키-값 구조가 없는 경우, 직렬화 된 이진 데이터와 같이 사람이 읽을 수 없는 경우, 또는 매우 많은 수의 인수를 보낼 때 사용하면 좋다.
 
 3. RESTful한 API를 설계했나요? 어떤 부분이 그런가요? 어떤 부분이 그렇지 않나요?
 
+    > HTTP Url을 통해 자원을 명시하고, HTTP method(POST, GET, PUT, DELETE)를 통해 해당 자원에 대한 CRUD OPERATION을 적용하였기 때문에 RESTful한 API라고 생각한다.
+    > 즉, HTTP Method를 통해 Resource를 처리하도록 설계하였다(Controller에서 주로 사용).
 
 4. 적절한 관심사 분리를 적용하였나요? (Controller, Repository, Service)
 
+    > Controller는 적절한 Service를 호출해서 매핑하는 역할을
+    > Repository는 Database에서 원하는 Data를 뽑아오는(또는 삽입하는) 역할을
+    > Service에는 비즈니스 로직을 수행하는 역할을 분배하여 관심사 분리를 적용하였다.
 
 5. 작성한 코드에서 빈(Bean)을 모두 찾아보세요!
 
+    > WritingController, WritingService, WritingRepository
