@@ -53,7 +53,7 @@ Use Case
 API 명세서
 | 기능              | Method | url               | Request             | Response             |
 |-----------------  |--------|-------------------|---------------------|---------------------|
-| 전체 게시글 목록 조회| GET  | /writings          |   -                       | List<Writing> |
+| 전체 게시글 목록 조회| GET  | /writings          |   -                       | List(Writing) |
 | 게시글 작성        | POST  | /writing           | {"title":"title", "content":"content", "author":"author", "password":"password"} | Writing                    |
 | 게시글 조회        | GET   | /writing/{id}      |   -                        | Writing        |
 | 게시글 수정        | PUT   | /writing/{id}      | {"title":"title", "content":"content", "author":"author", "password":"password"} | Writing                    |
