@@ -44,3 +44,18 @@ Innovation_w03 (Spring Basic Week)
 
 <br/>
 
+Use Case
+-----------------
+![innovation_w3_usecase](https://user-images.githubusercontent.com/48237998/185523420-b5dd9fe0-73bb-49f6-901f-3676acf3dfa7.png)
+
+<br/>
+
+API 명세서
+| 기능              | Method | url               | Request             | Response             |
+|-----------------  |--------|-------------------|---------------------|---------------------|
+| 전체 게시글 목록 조회| GET  | /writings          |   -                       | List<Writing> |
+| 게시글 작성        | POST  | /writing           | {"title":"title", "content":"content", "author":"author", "password":"password"} | Writing                    |
+| 게시글 조회        | GET   | /writing/{id}      |   -                        | Writing        |
+| 게시글 수정        | PUT   | /writing/{id}      | {"title":"title", "content":"content", "author":"author", "password":"password"} | Writing                    |
+| 게시글 삭제        | DELETE| /writing/{id}      |   -                        | Long id                    |
+| 게시글 비밀번호 확인 | POST  | /writing/check/{id}| {"password":"password"}   |  boolean             |
