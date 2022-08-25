@@ -7,9 +7,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class WritingRequestDto {
-    private String title;
+public class CommentRequestDto {
+    private String username;
     private String content;
-    //private String author;    //로그인해서 작성하기 때문에 불필요
-    //private String password;
 }

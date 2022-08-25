@@ -1,45 +1,52 @@
 package com.sparta.spring_basic.controller;
 
+import com.sparta.spring_basic.dto.ResponseDto;
 import com.sparta.spring_basic.dto.WritingRequestDto;
 import com.sparta.spring_basic.entity.Writing;
+import com.sparta.spring_basic.security.UserDetailsImpl;
 import com.sparta.spring_basic.service.WritingService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/writing")
 public class WritingController {
     private final WritingService writingService;
 
-    @PostMapping("/writing")
-    public Writing writePost(@RequestBody WritingRequestDto requestDto) {
-        return writingService.writePost(requestDto);
+    @PostMapping()
+    public ResponseDto<?> writePost(@RequestBody WritingRequestDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        String username = userDetails.getUsername();
+        return writingService.writePost(requestDto, username);
     }
 
-    @GetMapping("/writings")
-    public List<Writing> getAllPosts() {
+    @GetMapping()
+    public ResponseDto<?> getAllPosts() {
         return writingService.getAllPosts();
     }
 
-    @GetMapping("/writing/{id}")
-    public Writing getPost(@PathVariable Long id){
+    @GetMapping("/{id}")
+    public ResponseDto<?> getPost(@PathVariable Long id){
         return writingService.getPost(id);
     }
 
-    @PutMapping("/writing/{id}")
-    public Writing updatePost(@PathVariable Long id, @RequestBody WritingRequestDto requestDto) {
-        return writingService.updatePost(id, requestDto);
+    @PutMapping("/{id}")
+    public ResponseDto<?> updatePost(@PathVariable Long id, @RequestBody WritingRequestDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        String username = userDetails.getUsername();
+        return writingService.updatePost(id, requestDto, username);
     }
 
-    @DeleteMapping("/writing/{id}")
-    public Long deletePost(@PathVariable Long id){
-        return writingService.deletePost(id);
+    @DeleteMapping("/{id}")
+    public ResponseDto<?> deletePost(@PathVariable Long id, @AuthenticationPrincipal UserDetailsImpl userDetails){
+        String username = userDetails.getUsername();
+        return writingService.deletePost(id, username);
     }
 
-    @PostMapping("/writing/check/{id}")
-    public boolean checkPW(@PathVariable Long id, @RequestBody String password){
-        return writingService.checkPW(id, password);
-    }
+//    @PostMapping("/check/{id}")
+//    public boolean checkPW(@PathVariable Long id, @RequestBody String password){
+//        return writingService.checkPW(id, password);
+//    }
 }

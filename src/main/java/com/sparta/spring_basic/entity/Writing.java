@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED) // 기본 생성자 생성, 접근 권한 protected 지정
@@ -21,22 +22,26 @@ public class Writing extends Timestamped{
     private String content;     // 내용
     @Column(nullable = false)
     private String author;      // 작성자
-    @Column(nullable = false)
-    @JsonIgnore // 응답에 해당 데이터 포함하지 않음
-    private String password;       // 비밀번호
+    @Column
+    @OneToMany(cascade = CascadeType.REMOVE)    //글 삭제시 코멘트도 모두 삭제
+    private List<Comment> comments;
+
+//    @Column(nullable = false)
+//    @JsonIgnore // 응답에 해당 데이터 포함하지 않음
+//    private String password;       // 비밀번호
 
 
-    public Writing(WritingRequestDto requestDto){
+    public Writing(WritingRequestDto requestDto, String author){
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();
-        this.author = requestDto.getAuthor();
-        this.password = requestDto.getPassword();
+        this.author = author;
+        //this.password = requestDto.getPassword();
     }
 
     public void update(WritingRequestDto requestDto){
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();
-        this.author = requestDto.getAuthor();
-        this.password = requestDto.getPassword();
+        //this.author = requestDto.getAuthor();
+        //this.password = requestDto.getPassword();
     }
 }
