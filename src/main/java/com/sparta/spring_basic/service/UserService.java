@@ -31,7 +31,7 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public ResponseDto<User> signUp(SignupRequestDto requestDto) {
+    public ResponseDto<?> signUp(SignupRequestDto requestDto) {
         String nickname = requestDto.getNickname();
         String password = requestDto.getPassword();
         String passwordConfirm = requestDto.getPasswordConfirm();
@@ -42,7 +42,6 @@ public class UserService {
             return ResponseDto.fail(DUPLICATE_ID);
             //throw new CustomException(DUPLICATE_ID);
         }
-        System.out.println(nickname);
 
         // ID, PW 조건(패턴)
         String idPattern = "^[a-zA-Z0-9]{4,12}$";
@@ -53,13 +52,11 @@ public class UserService {
             return ResponseDto.fail(WRONG_PATTERN);
             //throw new CustomException(WRONG_PATTERN);
         }
-        System.out.println(password);
         // 비밀번호 일치 확인
         if (!passwordConfirm.equals(password)) {
             return ResponseDto.fail(WRONG_PW_CONFIRM);
             //throw new CustomException(WRONG_PW_CONFIRM);
         }
-        System.out.println(passwordConfirm);
 
         // 비밀번호 암호화
         password = passwordEncoder.encode(requestDto.getPassword());
@@ -70,7 +67,7 @@ public class UserService {
         return ResponseDto.success(user);
     }
 
-    public ResponseDto<User> login(LoginRequestDto requestDto, HttpServletResponse response) {
+    public ResponseDto<?> login(LoginRequestDto requestDto, HttpServletResponse response) {
         // 아이디 틀림
         Optional<User> optionalUser = userRepository.findByNickname(requestDto.getNickname());
         if(optionalUser.isEmpty()){

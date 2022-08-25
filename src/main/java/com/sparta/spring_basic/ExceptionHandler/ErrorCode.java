@@ -29,7 +29,10 @@ public enum ErrorCode {
     NO_AUTH("NO_AUTH", "You don't have permission"),
 
     //해당 글이 없음
-    NO_POST("NO_POST", "Post isn't exist");
+    NO_POST("NO_POST", "Post is not exist"),
+
+    //해당 코멘트가 없음
+    NO_COMMENT("NO_COMMENT", "Comment is not exist");
 
     private final String code;
     private final String message;

@@ -4,6 +4,7 @@ import static com.sparta.spring_basic.ExceptionHandler.ErrorCode.*;
 import com.sparta.spring_basic.dto.ResponseDto;
 import com.sparta.spring_basic.dto.WritingRequestDto;
 import com.sparta.spring_basic.entity.Writing;
+import com.sparta.spring_basic.repository.CommentRepository;
 import com.sparta.spring_basic.repository.WritingRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
@@ -16,6 +17,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class WritingService {
     private final WritingRepository writingRepository;
+    private final CommentRepository commentRepository;
 
     //게시글 작성
     @Transactional
@@ -77,6 +79,7 @@ public class WritingService {
             return ResponseDto.fail(NO_AUTH);
         }
 
+        commentRepository.deleteAllByWritingID(id);
         writingRepository.deleteById(id);
         return ResponseDto.success(id);
     }

@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -22,14 +23,10 @@ public class Writing extends Timestamped{
     private String content;     // 내용
     @Column(nullable = false)
     private String author;      // 작성자
-    @Column
-    @OneToMany(cascade = CascadeType.REMOVE)    //글 삭제시 코멘트도 모두 삭제
-    private List<Comment> comments;
 
 //    @Column(nullable = false)
 //    @JsonIgnore // 응답에 해당 데이터 포함하지 않음
 //    private String password;       // 비밀번호
-
 
     public Writing(WritingRequestDto requestDto, String author){
         this.title = requestDto.getTitle();

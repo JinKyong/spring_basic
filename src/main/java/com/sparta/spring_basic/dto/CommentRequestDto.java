@@ -1,5 +1,6 @@
 package com.sparta.spring_basic.dto;
 
+import com.sparta.spring_basic.entity.Writing;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CommentRequestDto {
-    private String username;
     private String content;
+    private Long writingID;
 }

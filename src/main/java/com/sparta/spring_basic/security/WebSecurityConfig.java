@@ -45,10 +45,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         //  로그인 성공, 실패 처리를 할 때 설정하는 법
         http.authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/").permitAll()
-                .antMatchers("/users/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/writing").permitAll()
-                .antMatchers(HttpMethod.GET, "/comments").permitAll()
-                //.antMatchers("/admin/**").hasAnyRole("ADMIN")
+                .antMatchers(HttpMethod.POST,"/user/**").permitAll()
+                .antMatchers("/writing/**").permitAll()
+                .antMatchers("/comment/**").permitAll()
+                .antMatchers("/admin/**").hasAnyRole("ADMIN")
                 .anyRequest().authenticated();
 
         // 접근 권한 설정
